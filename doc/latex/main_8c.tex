@@ -1,0 +1,353 @@
+\hypertarget{main_8c}{}\doxysection{main.\+c File Reference}
+\label{main_8c}\index{main.c@{main.c}}
+
+
+plik zawierajacy glowne funkcje oraz zadania programu  
+
+
+{\ttfamily \#include \char`\"{}stm32f1xx\+\_\+hal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmsis\+\_\+os.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gpio.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structdisplay}{display}}
+\begin{DoxyCompactList}\small\item\em elementy wchodzace w sklad kolejki pomiedzy zadaniem glownym a wyswietlaczem \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8c_a7c9ea719c59f503ea5f247296a883907}{main\+\_\+\+TASK\+\_\+\+PRIORITY}}~(tsk\+IDLE\+\_\+\+PRIORITY + 1)
+\begin{DoxyCompactList}\small\item\em ustawienie priorytetu zadania ktore pozwala na \char`\"{}rownloegle\char`\"{} wykonywanie zadan jesli jedno zadanie nic nie robi \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a70af21c671abfcc773614a9a4f63d920}{System\+Clock\+\_\+\+Config}} (void)
+\begin{DoxyCompactList}\small\item\em Ustawienie parametrow zegara systemowego w poprawnego dzialania systemu free\+Rtos. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a5e21660a915e0df1ed89a4b0ebd96dbb}{v\+Main}} (void $\ast$pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Zadanie glowne. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a5db7f5a5c7eb704581e362ef415335d1}{v\+Encoder}} (void $\ast$pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Zadanie enkodera. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a4a15624dddb788794cd2b33858cdcd13}{v\+Disp}} (void $\ast$pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Zadanie wyswietlacza. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a9ca051aa77e17583aa5a85d5de5c199a}{v\+Application\+Tick\+Hook}} (void)
+\begin{DoxyCompactList}\small\item\em Ustawienie parametrow zegara systemowego w celu odliczania 1 sekundy oraz sterowanie wyswietlaczami. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em Ladowanie calego systemu Free\+Rtos oraz inicjalizacja wykorzystywanych funkcji. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+x\+Queue\+Handle \mbox{\hyperlink{main_8c_ac0f397252e91f591c743ed232b77c562}{queue\+\_\+enkoder}}
+\begin{DoxyCompactList}\small\item\em Kolejka z enkodera przenoszaca zmienna enc (wiecej w \mbox{\hyperlink{main_8c_a5e21660a915e0df1ed89a4b0ebd96dbb}{v\+Main}} ) \end{DoxyCompactList}\item 
+x\+Queue\+Handle \mbox{\hyperlink{main_8c_af33953428deb697acb3b651ece3df1b8}{queue\+\_\+wyswietlacz}}
+\begin{DoxyCompactList}\small\item\em Kolejka z zadania v\+Main przenoszaca strukture \mbox{\hyperlink{structdisplay}{display}}. \end{DoxyCompactList}\item 
+const unsigned char \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}} \mbox{[}$\,$\mbox{]} = \{0x\+C0, 0x\+F9, 0x\+A4, 0x\+B0, 0x99, 0x92, 0x82, 0x\+F8, 0x80, 0x90\}
+\begin{DoxyCompactList}\small\item\em Tablica konwersji wartosci BIN na kod wskaznika siedmiosegmentowego. \end{DoxyCompactList}\item 
+x\+Semaphore\+Handle \mbox{\hyperlink{main_8c_a513add9eea43109e441e1ea237ee3746}{Tim1s}}
+\begin{DoxyCompactList}\small\item\em Semafor zalezny od przerwania co 1 sekunde w celu odmierzenia czasu. \end{DoxyCompactList}\item 
+volatile uint8\+\_\+t \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\+\_\+buf}} \mbox{[}4\mbox{]} = \{0,0,0,0\}
+\begin{DoxyCompactList}\small\item\em Wartosci poszczegolnych wyswietlaczy. \end{DoxyCompactList}\item 
+volatile uint8\+\_\+t \mbox{\hyperlink{main_8c_aea357b2244a322340ebc33e274afa15c}{LED\+\_\+ptr}}
+\begin{DoxyCompactList}\small\item\em Konkretny wyswietlacz ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+plik zawierajacy glowne funkcje oraz zadania programu 
+
+ 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{main_8c_a7c9ea719c59f503ea5f247296a883907}\label{main_8c_a7c9ea719c59f503ea5f247296a883907}} 
+\index{main.c@{main.c}!main\_TASK\_PRIORITY@{main\_TASK\_PRIORITY}}
+\index{main\_TASK\_PRIORITY@{main\_TASK\_PRIORITY}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main\_TASK\_PRIORITY}{main\_TASK\_PRIORITY}}
+{\footnotesize\ttfamily \#define main\+\_\+\+TASK\+\_\+\+PRIORITY~(tsk\+IDLE\+\_\+\+PRIORITY + 1)}
+
+
+
+ustawienie priorytetu zadania ktore pozwala na \char`\"{}rownloegle\char`\"{} wykonywanie zadan jesli jedno zadanie nic nie robi 
+
+
+\begin{DoxyItemize}
+\item oczywiscie \char`\"{}rownolegle\char`\"{} nie oznacza ze zadania wykonuja sie rownolegle, tylko kolejno po sobie w niewielkich odstepach czasowych dajac zludne wrazenie rownoleglego wykonywania ustawienie takiej wartosci pozwala na wykonywanie kolejnych zadan kiedy aktualne zadanie nie wykonuje zadnych zadan 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ladowanie calego systemu Free\+Rtos oraz inicjalizacja wykorzystywanych funkcji. 
+
+Reset of all peripherals, Initializes the Flash interface and the Systick.
+
+Configure the system clock
+
+Initialize all configured peripherals
+
+Stworzenie kolejek
+
+
+\begin{DoxyItemize}
+\item Stworzenie pierwszej kolejki \mbox{\hyperlink{main_8c_ac0f397252e91f591c743ed232b77c562}{queue\+\_\+enkoder}}
+\item Stworzenie drugiej kolejki \mbox{\hyperlink{main_8c_af33953428deb697acb3b651ece3df1b8}{queue\+\_\+wyswietlacz}}
+\end{DoxyItemize}
+
+Stworzenie semafora
+
+
+\begin{DoxyItemize}
+\item Stworzenie semafora \mbox{\hyperlink{main_8c_a513add9eea43109e441e1ea237ee3746}{Tim1s}}
+\end{DoxyItemize}
+
+Stworzenie zadan
+
+
+\begin{DoxyItemize}
+\item Stworzenie pierwszego zadania \mbox{\hyperlink{main_8c_a5e21660a915e0df1ed89a4b0ebd96dbb}{v\+Main}}
+\item Stworzenie drugiego zadania \mbox{\hyperlink{main_8c_a5db7f5a5c7eb704581e362ef415335d1}{v\+Encoder}}
+\item Stworzenie trzeciego zadania \mbox{\hyperlink{}{v\+Display}}
+\end{DoxyItemize}
+
+Start scheduler\mbox{\Hypertarget{main_8c_a70af21c671abfcc773614a9a4f63d920}\label{main_8c_a70af21c671abfcc773614a9a4f63d920}} 
+\index{main.c@{main.c}!SystemClock\_Config@{SystemClock\_Config}}
+\index{SystemClock\_Config@{SystemClock\_Config}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{SystemClock\_Config()}{SystemClock\_Config()}}
+{\footnotesize\ttfamily void System\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ustawienie parametrow zegara systemowego w poprawnego dzialania systemu free\+Rtos. 
+
+System Clock Configuration \mbox{\Hypertarget{main_8c_a9ca051aa77e17583aa5a85d5de5c199a}\label{main_8c_a9ca051aa77e17583aa5a85d5de5c199a}} 
+\index{main.c@{main.c}!vApplicationTickHook@{vApplicationTickHook}}
+\index{vApplicationTickHook@{vApplicationTickHook}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{vApplicationTickHook()}{vApplicationTickHook()}}
+{\footnotesize\ttfamily void v\+Application\+Tick\+Hook (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ustawienie parametrow zegara systemowego w celu odliczania 1 sekundy oraz sterowanie wyswietlaczami. 
+
+\mbox{\Hypertarget{main_8c_a4a15624dddb788794cd2b33858cdcd13}\label{main_8c_a4a15624dddb788794cd2b33858cdcd13}} 
+\index{main.c@{main.c}!vDisp@{vDisp}}
+\index{vDisp@{vDisp}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{vDisp()}{vDisp()}}
+{\footnotesize\ttfamily void v\+Disp (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv\+Parameters }\end{DoxyParamCaption})}
+
+
+
+Zadanie wyswietlacza. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & jest to czas w sekundach \\
+\hline
+{\em minute} & jest to czas w minutach \\
+\hline
+{\em hour} & jest to czas w godzinach\\
+\hline
+\end{DoxyParams}
+~\newline
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{*/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hour==0)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[3]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[(minute\ \%100)\ /10];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[2]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[minute\ \%\ 10];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[1]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[(time\ \%100)\ /10];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[0]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[time\ \%\ 10];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[3]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[0];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[2]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[hour];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[1]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[(minute\ \%100)\ /10];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_af38fabd72c461c07f07c0f02b4dbc982}{LED\_buf}}[0]\ =\ \mbox{\hyperlink{main_8c_acd976766f972b918ceba271c58ffa67c}{seg7}}[minute\ \%\ 10];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ }
+
+\end{DoxyCode}
+
+
+Mozna zauwazyc sposob zmiany zakresu wyswietlania\mbox{\Hypertarget{main_8c_a5db7f5a5c7eb704581e362ef415335d1}\label{main_8c_a5db7f5a5c7eb704581e362ef415335d1}} 
+\index{main.c@{main.c}!vEncoder@{vEncoder}}
+\index{vEncoder@{vEncoder}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{vEncoder()}{vEncoder()}}
+{\footnotesize\ttfamily void v\+Encoder (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv\+Parameters }\end{DoxyParamCaption})}
+
+
+
+Zadanie enkodera. 
+
+ 
+\begin{DoxyParams}{Parameters}
+{\em rotete1} & jest to pierwsza pozycja diagramu oraz jest to pierwszy styk enkodera \\
+\hline
+{\em rotete2} & jest to druga pozycja diagramu oraz jest to drugi styk enkodera \\
+\hline
+{\em state} & jest to stan w ktorym aktualnie sie znajdujemy \\
+\hline
+{\em enc} & jest to zmienna wpisywana do kolejki i idaca do zadania \mbox{\hyperlink{main_8c_a5e21660a915e0df1ed89a4b0ebd96dbb}{v\+Main}} ~\newline
+\DoxyHorRuler{0}
+
+\begin{DoxyItemize}
+\item W przypadku przejscia ze stanu 3 do 0 nastepuje wpisanie do zmiennej enc wartosci +1
+\item W przypadku przejscia ze stanu 6 do 0 nastepuje wpisanie do zmiennej enc wartosci -\/1 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a5e21660a915e0df1ed89a4b0ebd96dbb}\label{main_8c_a5e21660a915e0df1ed89a4b0ebd96dbb}} 
+\index{main.c@{main.c}!vMain@{vMain}}
+\index{vMain@{vMain}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{vMain()}{vMain()}}
+{\footnotesize\ttfamily void v\+Main (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv\+Parameters }\end{DoxyParamCaption})}
+
+
+
+Zadanie glowne. 
+
+ 
+\begin{DoxyParams}{Parameters}
+{\em state} & ~\newline
+\\
+\hline
+\end{DoxyParams}
+jesli parametr state jest rowny
+
+\DoxyHorRuler{0}
+
+\begin{DoxyItemize}
+\item 0 to pobierana jest wartosc +1 lub -\/1 z kolejki a nastepnie obsluga nastawiania czasu
+\item 1 to odliczanie czasu pobranego z case 0 i wysylanie na wyswietlacz, w przypadku 00\+:00 przechodzi do case 2
+\item 2 to nastepuje generowanie sygnalu dzwiekowego i przejscie do case 0
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ 
+\begin{DoxyParams}{Parameters}
+{\em enc} & jest to wartosc mowiaca o inkrementacji lub dekrementacji podczas ustawiania czasu\\
+\hline
+{\em queue\+\_\+wyswietlacz} & jest to kolejka opuszczajaca v\+Main i idaca do \mbox{\hyperlink{main_8c_a4a15624dddb788794cd2b33858cdcd13}{v\+Disp}}\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8c_af38fabd72c461c07f07c0f02b4dbc982}\label{main_8c_af38fabd72c461c07f07c0f02b4dbc982}} 
+\index{main.c@{main.c}!LED\_buf@{LED\_buf}}
+\index{LED\_buf@{LED\_buf}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{LED\_buf}{LED\_buf}}
+{\footnotesize\ttfamily volatile uint8\+\_\+t LED\+\_\+buf\mbox{[}4\mbox{]} = \{0,0,0,0\}}
+
+
+
+Wartosci poszczegolnych wyswietlaczy. 
+
+\hypertarget{main_8c_multi_row}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\caption{Tabela uzytych wyjsc}\label{main_8c_multi_row}\\
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Segment }&\cellcolor{\tableheadbgcolor}\textbf{ Wyjscie }&\cellcolor{\tableheadbgcolor}\textbf{ Wyswietlacz }&\cellcolor{\tableheadbgcolor}\textbf{ Wyjscie }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Segment }&\cellcolor{\tableheadbgcolor}\textbf{ Wyjscie }&\cellcolor{\tableheadbgcolor}\textbf{ Wyswietlacz }&\cellcolor{\tableheadbgcolor}\textbf{ Wyjscie }\\\cline{1-4}
+\endhead
+\multirow{1}{*}{pd }&PD7 &LED4 &PB14 \\\cline{1-4}
+\multirow{1}{*}{g }&PD6 &LED3 &PB9 \\\cline{1-4}
+\multirow{1}{*}{f }&PD5 &LED2 &PB5 \\\cline{1-4}
+\multirow{1}{*}{e }&PD4 &LED1 &PB1 ~\newline
+ \\\cline{1-4}
+\multirow{1}{*}{d }&PD7 \\\cline{1-4}
+\multirow{1}{*}{c }&PD2 \\\cline{1-4}
+\multirow{1}{*}{b }&PD1 \\\cline{1-4}
+\multirow{1}{*}{a }&PD0 \\\cline{1-4}
+\end{longtabu}
+
+
+\begin{DoxyVerb}Zmienne wykorzystywane do obslugi wyswietlacza LED
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em LED\+\_\+buf} & jako wartosc \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_aea357b2244a322340ebc33e274afa15c}\label{main_8c_aea357b2244a322340ebc33e274afa15c}} 
+\index{main.c@{main.c}!LED\_ptr@{LED\_ptr}}
+\index{LED\_ptr@{LED\_ptr}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{LED\_ptr}{LED\_ptr}}
+{\footnotesize\ttfamily volatile uint8\+\_\+t LED\+\_\+ptr}
+
+
+
+Konkretny wyswietlacz ~\newline
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em LED\+\_\+ptr} & jako numer wyswietlacza \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_ac0f397252e91f591c743ed232b77c562}\label{main_8c_ac0f397252e91f591c743ed232b77c562}} 
+\index{main.c@{main.c}!queue\_enkoder@{queue\_enkoder}}
+\index{queue\_enkoder@{queue\_enkoder}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{queue\_enkoder}{queue\_enkoder}}
+{\footnotesize\ttfamily x\+Queue\+Handle queue\+\_\+enkoder}
+
+
+
+Kolejka z enkodera przenoszaca zmienna enc (wiecej w \mbox{\hyperlink{main_8c_a5e21660a915e0df1ed89a4b0ebd96dbb}{v\+Main}} ) 
+
+\mbox{\Hypertarget{main_8c_af33953428deb697acb3b651ece3df1b8}\label{main_8c_af33953428deb697acb3b651ece3df1b8}} 
+\index{main.c@{main.c}!queue\_wyswietlacz@{queue\_wyswietlacz}}
+\index{queue\_wyswietlacz@{queue\_wyswietlacz}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{queue\_wyswietlacz}{queue\_wyswietlacz}}
+{\footnotesize\ttfamily x\+Queue\+Handle queue\+\_\+wyswietlacz}
+
+
+
+Kolejka z zadania v\+Main przenoszaca strukture \mbox{\hyperlink{structdisplay}{display}}. 
+
+\mbox{\Hypertarget{main_8c_acd976766f972b918ceba271c58ffa67c}\label{main_8c_acd976766f972b918ceba271c58ffa67c}} 
+\index{main.c@{main.c}!seg7@{seg7}}
+\index{seg7@{seg7}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{seg7}{seg7}}
+{\footnotesize\ttfamily const unsigned char seg7\mbox{[}$\,$\mbox{]} = \{0x\+C0, 0x\+F9, 0x\+A4, 0x\+B0, 0x99, 0x92, 0x82, 0x\+F8, 0x80, 0x90\}}
+
+
+
+Tablica konwersji wartosci BIN na kod wskaznika siedmiosegmentowego. 
+
+\hypertarget{main_8c_multi_row}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{10}{|X[-1]}|}
+\caption{Tabela znakow do wyswietlacza }\label{main_8c_multi_row}\\
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ 0x\+C0 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+F9 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+A4 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+B0 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x99 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x92 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x82 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+F8 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x80 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x90 }\\\cline{1-10}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ 0x\+C0 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+F9 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+A4 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+B0 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x99 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x92 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x82 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x\+F8 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x80 }&\cellcolor{\tableheadbgcolor}\textbf{ 0x90 }\\\cline{1-10}
+\endhead
+\multirow{1}{*}{0 }&1 &2 &3 &4 &5 &6 &7 &8 &9 {\begin{tabularx}{\linewidth}{|*{0}{>{\raggedright\arraybackslash}X|}}\hline
+\end{tabularx}}
+\\\cline{1-10}
+\end{longtabu}
+\mbox{\Hypertarget{main_8c_a513add9eea43109e441e1ea237ee3746}\label{main_8c_a513add9eea43109e441e1ea237ee3746}} 
+\index{main.c@{main.c}!Tim1s@{Tim1s}}
+\index{Tim1s@{Tim1s}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{Tim1s}{Tim1s}}
+{\footnotesize\ttfamily x\+Semaphore\+Handle Tim1s}
+
+
+
+Semafor zalezny od przerwania co 1 sekunde w celu odmierzenia czasu. 
+

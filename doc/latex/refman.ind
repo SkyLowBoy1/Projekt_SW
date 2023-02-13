@@ -1,0 +1,62 @@
+\begin{theindex}
+
+  \item {display}, \hyperpage{13}
+
+  \indexspace
+
+  \item {HAL\_InitTick}
+    \subitem {HAL\_TimeBase}, \hyperpage{9}
+  \item {HAL\_ResumeTick}
+    \subitem {HAL\_TimeBase}, \hyperpage{11}
+  \item {HAL\_SuspendTick}
+    \subitem {HAL\_TimeBase}, \hyperpage{11}
+  \item {HAL\_TIM\_PeriodElapsedCallback}
+    \subitem {HAL\_TimeBase}, \hyperpage{11}
+  \item {HAL\_TimeBase}, \hyperpage{9}
+    \subitem {HAL\_InitTick}, \hyperpage{9}
+    \subitem {HAL\_ResumeTick}, \hyperpage{11}
+    \subitem {HAL\_SuspendTick}, \hyperpage{11}
+    \subitem {HAL\_TIM\_PeriodElapsedCallback}, \hyperpage{11}
+
+  \indexspace
+
+  \item {LED\_buf}
+    \subitem {main.c}, \hyperpage{18}
+  \item {LED\_ptr}
+    \subitem {main.c}, \hyperpage{18}
+
+  \indexspace
+
+  \item {main}
+    \subitem {main.c}, \hyperpage{16}
+  \item {main.c}, \hyperpage{15}
+    \subitem {LED\_buf}, \hyperpage{18}
+    \subitem {LED\_ptr}, \hyperpage{18}
+    \subitem {main}, \hyperpage{16}
+    \subitem {main\_TASK\_PRIORITY}, \hyperpage{16}
+    \subitem {SystemClock\_Config}, \hyperpage{16}
+    \subitem {vApplicationTickHook}, \hyperpage{17}
+    \subitem {vDisp}, \hyperpage{17}
+    \subitem {vEncoder}, \hyperpage{17}
+    \subitem {vMain}, \hyperpage{18}
+  \item {main\_TASK\_PRIORITY}
+    \subitem {main.c}, \hyperpage{16}
+
+  \indexspace
+
+  \item {STM32F7xx\_HAL\_Examples}, \hyperpage{9}
+  \item {SystemClock\_Config}
+    \subitem {main.c}, \hyperpage{16}
+
+  \indexspace
+
+  \item {vApplicationTickHook}
+    \subitem {main.c}, \hyperpage{17}
+  \item {vDisp}
+    \subitem {main.c}, \hyperpage{17}
+  \item {vEncoder}
+    \subitem {main.c}, \hyperpage{17}
+  \item {vMain}
+    \subitem {main.c}, \hyperpage{18}
+
+\end{theindex}
